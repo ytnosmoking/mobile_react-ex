@@ -1,10 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import VConsole from 'vconsole'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import store from './store'
+import App from './App';
+import './assets/css/base.less'
+import * as serviceWorker from './serviceWorker';
+import { isDev } from 'utils/tools'
+if (isDev) {
+  // eslint-disable-next-line
+  const vConsole = new VConsole()
+}
+const Router = BrowserRouter
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+  , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
