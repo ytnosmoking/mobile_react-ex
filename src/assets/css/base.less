@@ -91,6 +91,26 @@ video {
   /* font: inherit; */
   /* vertical-align: baseline; */
   box-sizing: border-box;
+  // -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-focus: none;
+  -moz-user-select: none;
+}
+
+::selection {
+  background: transparent;
+
+}
+
+::-moz-selection {
+  background: transparent;
+
+}
+
+::-webkit-selection {
+  background: transparent;
+
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -152,9 +172,7 @@ a {
   text-decoration: none;
 }
 
-* {
-  touch-action: manipulation;
-}
+
 
 .clearfix::before,
 .clearfix::after {
@@ -166,18 +184,25 @@ a {
   height: 0;
 }
 
+
 #root {
   height: 100vh;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-}
 
-.App {
-  height: 100vh;
-  width: 100vw;
-  background-color: #ccc;
-  text-align: center;
-  & > div:first-child {
+  &>div:first-child {
     height: 100%;
   }
 }
+
+
+/* .App {
+   height: 100vh;
+   width: 100vw;
+   background-color: #ccc;
+   text-align: center;
+   & > div:first-child {
+     height: 100%;
+   }
+ }
+ */

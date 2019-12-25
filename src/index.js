@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 
 import store from './store'
 import App from './App';
+// import './assets/css/common.less'
 import './assets/css/base.less'
 import * as serviceWorker from './serviceWorker';
 import { isDev } from 'utils/tools'
@@ -13,6 +14,7 @@ if (isDev) {
   // eslint-disable-next-line
   const vConsole = new VConsole()
 }
+
 const Router = BrowserRouter
 
 ReactDOM.render(

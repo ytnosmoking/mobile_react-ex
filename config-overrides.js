@@ -1,6 +1,7 @@
 const {
   override,
   addLessLoader,
+  overrideDevServer,
   fixBabelImports, addDecoratorsLegacy, addWebpackAlias } = require('customize-cra')
 
 
@@ -13,9 +14,11 @@ function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
 const plugins = [new SimpleProgressWebpackPlugin()]
-if (isDev) {
-  plugins.push(new BundleAnalyzerPlugin())
-}
+// if (isDev) {
+//   plugins.push(new BundleAnalyzerPlugin({
+//     analyzerPort: 8889
+//   }))
+// }
 
 const customize = () => config => {
   if (!isDev) {
@@ -94,26 +97,40 @@ const customize = () => config => {
 }
 
 
-module.exports = override(
+const resetPort = () => config => {
+  console.log(` in  reset Port`)
+  console.log(config)
+  // return config
+  return config
+  // throw new Error()
+  // return config
+}
 
-  addLessLoader(
-    {
-      javascriptEnabled: true,
-    }
+module.exports = {
+
+  webpack: override(
+
+    addLessLoader(
+      {
+        javascriptEnabled: true,
+      }
+    ),
+    customize(),
+    fixBabelImports('import', {
+      libraryName: 'antd-mobile',
+      style: 'css'
+    }),
+
+    addDecoratorsLegacy(),
+    addWebpackAlias({
+      pages: resolve('src/pages'),
+      component: resolve('src/components'),
+      store: resolve('src/store'),
+      utils: resolve('src/utils'),
+      router: resolve('src/router'),
+      images: resolve('src/assets/image')
+    })
   ),
-  customize(),
-  fixBabelImports('import', {
-    libraryName: 'antd-mobile',
-    style: 'css'
-  }),
-  addDecoratorsLegacy(),
-  addWebpackAlias({
-    pages: resolve('src/pages'),
-    component: resolve('src/components'),
-    store: resolve('src/store'),
-    utils: resolve('src/utils'),
-    router: resolve('src/router'),
-    images: resolve('src/assets/image')
-  })
-)
+  devServer: overrideDevServer(resetPort()),
+}
 
