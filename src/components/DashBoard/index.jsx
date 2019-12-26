@@ -53,7 +53,8 @@ class DashBoard extends Component {
   render() {
     console.log(this.props.base);
     return (
-      <div className="cont">
+      // <div className="cont">
+      <React.Fragment>
         <Switch>
           {routes.map(route => (
             <Route
@@ -65,7 +66,8 @@ class DashBoard extends Component {
           <Redirect from="*" to="/home"></Redirect>
         </Switch>
         <NavBar />
-      </div>
+      </React.Fragment>
+      // </div>
     );
   }
 }
